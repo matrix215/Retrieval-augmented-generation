@@ -14,3 +14,26 @@ LangChain has a number of components specifically designed to help build RAG app
 Here we focus on RAG for unstructured data. Two RAG use cases which we cover elsewhere are:
 - [QA over structured data](/docs/use_cases/qa_structured/sql) (e.g., SQL)
 - [QA over code](/docs/use_cases/question_answering/code_understanding) (e.g., Python)
+
+
+## Architecture
+A typical RAG application has two main components:
+
+**Indexing**: a pipeline for ingesting data from a source and indexing it. *This usually happens offline.*
+
+**Retrieval and generation**: the actual RAG chain, which takes the user query at run time and retrieves the relevant data from the index, then passes that to the model.
+
+The most common full sequence from raw data to answer looks like this:
+
+#### Indexing
+1. **Load**: First we need to load our data. We'll use [DocumentLoaders](/docs/modules/data_connection/document_loaders/) for this.
+2. **Split**: [Text splitters](/docs/modules/data_connection/document_transformers/) break large `Documents` into smaller chunks. This is useful both for indexing data and for passing it in to a model, since large chunks are harder to search over and won't in a model's finite context window.
+3. **Store**: We need somewhere to store and index our splits so that they can later be searched over. This is often done using a [VectorStore](/docs/modules/data_connection/vectorstores/) and [Embeddings](/docs/modules/data_connection/text_embedding/) model.
+
+![index_diagram](/img/rag_indexing.png)
+
+#### Retrieval and Generation
+4. **Retrieve**: Given a user input, relevant splits are retrieved from storage using a [Retriever](/docs/modules/data_connection/retrievers/).
+5. **Generate**: A [ChatModel](/docs/modules/model_io/chat_models) / [LLM](/docs/modules/model_io/llms/) produces an answer using a prompt that includes the question and the retrieved data
+
+![retrieval_diagram](/img/rag_retrieval_generation.png)
