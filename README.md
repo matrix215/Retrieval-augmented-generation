@@ -40,7 +40,7 @@ The most common full sequence from raw data to answer looks like this:
 ![image](https://github.com/matrix215/Retrieval-augmented-generation/assets/101815603/6d20a339-9e36-4874-8dbd-99127b88efae)
 
 
-# REF
+# Reference 
 I will reference this LangChain Page
 
 https://python.langchain.com/docs/use_cases/question_answering/
