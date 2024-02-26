@@ -30,10 +30,12 @@ The most common full sequence from raw data to answer looks like this:
 2. **Split**: [Text splitters](/docs/modules/data_connection/document_transformers/) break large `Documents` into smaller chunks. This is useful both for indexing data and for passing it in to a model, since large chunks are harder to search over and won't in a model's finite context window.
 3. **Store**: We need somewhere to store and index our splits so that they can later be searched over. This is often done using a [VectorStore](/docs/modules/data_connection/vectorstores/) and [Embeddings](/docs/modules/data_connection/text_embedding/) model.
 
-![index_diagram](/img/rag_indexing.png)
+![image](https://github.com/matrix215/Retrieval-augmented-generation/assets/101815603/bde07e45-0cd0-4b8e-8eff-bc38e453cb46)
+
 
 #### Retrieval and Generation
 4. **Retrieve**: Given a user input, relevant splits are retrieved from storage using a [Retriever](/docs/modules/data_connection/retrievers/).
 5. **Generate**: A [ChatModel](/docs/modules/model_io/chat_models) / [LLM](/docs/modules/model_io/llms/) produces an answer using a prompt that includes the question and the retrieved data
 
-![retrieval_diagram](/img/rag_retrieval_generation.png)
+![image](https://github.com/matrix215/Retrieval-augmented-generation/assets/101815603/6d20a339-9e36-4874-8dbd-99127b88efae)
+
